@@ -1,0 +1,38 @@
+{
+  "slug": "ecdsa-p256-digest",
+  "instance_name": "ECDSA_P256_Digest",
+  "title": "ECDSA P-256: Efficient Longfellow Circuit Verification",
+  "status": "challenge-package",
+  "curve": "P-256 / secp256r1",
+  "mode": "supplied-32-byte-digest",
+  "public_key_bytes": 64,
+  "digest_bytes": 32,
+  "signature_bytes": 64,
+  "cost_metric": "allocations + constraints",
+  "baseline_score": null,
+  "published": false,
+  "description_file": "CHALLENGE.md",
+  "trusted_relation": "Challenge.Specs.ECDSAP256.Spec",
+  "config": "configs/ECDSA_P256_Digest.json",
+  "lean": "4.34.0",
+  "test_vectors": {
+    "total": 276,
+    "valid": 166,
+    "invalid": 110,
+    "upstream": 262,
+    "local": 14,
+    "ordinary_ecdsa_differences": 14
+  },
+  "reference_verifier": {
+    "repository": "https://github.com/z-tech/longfellow-zk",
+    "commit": "4fe092be7e8e9634cd3b27daf55695a3a416043e",
+    "pull_request": "https://github.com/longfellow-zk/longfellow-zk/pull/215",
+    "source": "vendor/longfellow/ECDSA/EcdsaCircuit.lean",
+    "relation": "ValidEcdsaWitness",
+    "variant": "upstream circuit satisfiability with byte/signature envelope"
+  },
+  "circuit_field": {
+    "name": "P-256 base field",
+    "modulus": "115792089210356248762697446949407573530086143415290314195533631308867097853951"
+  }
+}

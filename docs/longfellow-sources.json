@@ -1,0 +1,44 @@
+[
+  {
+    "file": "vendor/longfellow/ECDSA/Nat.lean",
+    "url": "https://raw.githubusercontent.com/z-tech/longfellow-zk/4fe092be7e8e9634cd3b27daf55695a3a416043e/formal/circuits/ECDSA/Nat.lean",
+    "sha256": "979e5cccaf4248307ed7ba9c42a8894695f68017687c1b93dec36207e0c5634c",
+    "local_sha256": "06e7fde547e70de82fd1a54c5e992b5cdd47f12b7db9f93836f7b7109f0dc366"
+  },
+  {
+    "file": "vendor/longfellow/ECDSA/EC.lean",
+    "url": "https://raw.githubusercontent.com/z-tech/longfellow-zk/4fe092be7e8e9634cd3b27daf55695a3a416043e/formal/circuits/ECDSA/EC.lean",
+    "sha256": "8b6fb95cf725ff10ee475256ccf445b928e1bedaea578f8dfbce94655819e223",
+    "local_sha256": "8b6fb95cf725ff10ee475256ccf445b928e1bedaea578f8dfbce94655819e223"
+  },
+  {
+    "file": "vendor/longfellow/ECDSA/EcdsaSpec.lean",
+    "url": "https://raw.githubusercontent.com/z-tech/longfellow-zk/4fe092be7e8e9634cd3b27daf55695a3a416043e/formal/circuits/ECDSA/EcdsaSpec.lean",
+    "sha256": "cbbb8a7e8b5fc8ab026a6e8338835daab95d37cb96566eb81e7eb4263e53e517",
+    "local_sha256": "cbbb8a7e8b5fc8ab026a6e8338835daab95d37cb96566eb81e7eb4263e53e517"
+  },
+  {
+    "file": "vendor/longfellow/ECDSA/PowMod.lean",
+    "url": "https://raw.githubusercontent.com/z-tech/longfellow-zk/4fe092be7e8e9634cd3b27daf55695a3a416043e/formal/circuits/ECDSA/PowMod.lean",
+    "sha256": "7ff37067de464b480d07d763a04fa63e5469f28caa46292cf6f7277e8e7ebda0",
+    "local_sha256": "7ff37067de464b480d07d763a04fa63e5469f28caa46292cf6f7277e8e7ebda0"
+  },
+  {
+    "file": "vendor/longfellow/ECDSA/Pratt.lean",
+    "url": "https://raw.githubusercontent.com/z-tech/longfellow-zk/4fe092be7e8e9634cd3b27daf55695a3a416043e/formal/circuits/ECDSA/Pratt.lean",
+    "sha256": "41691421ee0c38079ab613f4b173c53c68daf0293f09ec20de3835ed8d937eb8",
+    "local_sha256": "41691421ee0c38079ab613f4b173c53c68daf0293f09ec20de3835ed8d937eb8"
+  },
+  {
+    "file": "vendor/longfellow/LICENSE",
+    "url": "https://raw.githubusercontent.com/z-tech/longfellow-zk/4fe092be7e8e9634cd3b27daf55695a3a416043e/LICENSE",
+    "sha256": "23a6981afa4326bdc659e4ca640acea5648c35f10c1a46b633efbd5a0fae1fbe",
+    "local_sha256": "23a6981afa4326bdc659e4ca640acea5648c35f10c1a46b633efbd5a0fae1fbe"
+  },
+  {
+    "file": "vendor/longfellow/ECDSA/EcdsaCircuit.lean",
+    "url": "https://raw.githubusercontent.com/z-tech/longfellow-zk/4fe092be7e8e9634cd3b27daf55695a3a416043e/formal/circuits/ECDSA/EcdsaCircuit.lean",
+    "sha256": "2033cc77408d7eb8cb1f87cedf0e1e69b9eaa66e8d606f73c5f7627506aaddaa",
+    "local_sha256": "2033cc77408d7eb8cb1f87cedf0e1e69b9eaa66e8d606f73c5f7627506aaddaa"
+  }
+]

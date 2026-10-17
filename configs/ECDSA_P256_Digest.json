@@ -1,0 +1,23 @@
+{
+  "challenge_module": "Challenge.Instances.ECDSA_P256_Digest.Challenge",
+  "solution_module": "Solution.ECDSA_P256_Digest.Main",
+  "theorem_names": [
+    "Solution.ECDSA_P256_Digest.soundness",
+    "Solution.ECDSA_P256_Digest.completeness",
+    "Solution.ECDSA_P256_Digest.mainCost",
+    "Solution.ECDSA_P256_Digest.isR1CS",
+    "Solution.ECDSA_P256_Digest.witgenIsIR",
+    "Solution.ECDSA_P256_Digest.computableWitness",
+    "Solution.ECDSA_P256_Digest.requirementsChannelsLawful"
+  ],
+  "definition_names": [
+    "Solution.ECDSA_P256_Digest.main",
+    "Solution.ECDSA_P256_Digest.elaborated"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": false
+}

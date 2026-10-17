@@ -1,0 +1,8 @@
+{
+  "commit": "4fe092be7e8e9634cd3b27daf55695a3a416043e",
+  "total_cases": 276,
+  "cpp_evaluated": 200,
+  "byte_envelope_rejections": 76,
+  "passed": true,
+  "scope": "actual circuit evaluator on generated witnesses; not an exhaustive existential equivalence proof"
+}
