@@ -1,6 +1,6 @@
 # Validation of the circuit target
 
-Final local results (2026-10-17):
+Native-interface validation (2026-10-18; C++ adapter evidence retained from the unchanged pinned implementation):
 
 | Check | Result |
 |---|---|
@@ -9,13 +9,13 @@ Final local results (2026-10-17):
 | Trusted axiom audit | 4 roots passed; standard axioms only |
 | Lean circuit-path vectors | 276/276 |
 | RustCrypto-based vector checks | 276/276; 262 original-message checks |
-| Actual C++ evaluator plus declared byte envelope | 276/276 (200 C++, 76 envelope rejections) |
+| External C++ byte-adapter diagnostics | 276/276 (200 C++, 76 envelope rejections) |
 | Comparator positive/negative checks | 4/4 |
 | Source hashes and deterministic corpus | Passed |
 
 The authoritative challenge relation wraps Longfellow's `ValidEcdsaWitness` at
 commit `4fe092be7e8e9634cd3b27daf55695a3a416043e`. The circuit field is P-256's base
-field. The wrapper retains explicit canonical byte/signature binding.
+field. The wrapper directly checks the supplied native witness.
 
 ## Vector coverage
 
@@ -36,8 +36,8 @@ and eleven exceptional table cases (including existing upstream fixtures).
   circuit is called. See `cpp-validation.json`.
 
 These tests establish observed agreement on the corpus, not a universal decision
-procedure for existential witnesses. Challenge acceptance is defined directly
-using the upstream relation, not by any executable oracle. The Lean model uses
+procedure for existential witnesses. Challenge acceptance checks the supplied native witness directly using the
+upstream relation, not an existential statement or executable oracle. The Lean model uses
 selectors 0..7; C++ uses their centered encoding 2*v-7.
 
 ## Proof and integration checks
@@ -61,3 +61,12 @@ upstream development shim, not a production sandbox.
 No R1CS baseline, proof of the C++ compiler, production deployment or full
 credential protocol is claimed. Contestants must prove equivalence to the pinned
 circuit relation, not completeness for all mathematical ECDSA inputs.
+
+The 276 serialized fixtures remain external adapters after the native-interface
+migration. Their 76 byte-envelope rejections do not establish native constraints.
+The comparator positive fixture now proves definitional equivalence directly to
+`ValidEcdsaWitness` for the supplied native input/witness tuple. The fixed 1,037
+input elements are outside additional-allocation scoring.
+
+The native regression also proves that a supplied witness with `rx_inv = 0`
+cannot satisfy the target, independently of the key or digest.

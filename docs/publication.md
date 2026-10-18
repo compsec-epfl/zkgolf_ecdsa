@@ -7,7 +7,7 @@ proof contract. No circuit solution or measured par is supplied. Template
 placeholders and zero cost slots must not be submitted as a solution or score.
 
 The target is Longfellow’s `ValidEcdsaWitness` circuit model over the P-256
-base field, with the byte/signature envelope in `Challenge/Specs/ECDSAP256.lean`.
+base field, with the native pointwise interface in `Challenge/Specs/ECDSAP256.lean`.
 Do not substitute the broader `StandardEcdsaVerify` proposition.
 
 The supported toolchain is Lean 4.34.0, with exact Clean and Mathlib revisions

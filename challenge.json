@@ -4,11 +4,8 @@
   "title": "ECDSA P-256: Efficient Longfellow Circuit Verification",
   "status": "challenge-package",
   "curve": "P-256 / secp256r1",
-  "mode": "supplied-32-byte-digest",
-  "public_key_bytes": 64,
-  "digest_bytes": 32,
-  "signature_bytes": 64,
-  "cost_metric": "allocations + constraints",
+  "mode": "native-field-inputs-and-source-witness",
+  "cost_metric": "additional witness allocations + constraints",
   "baseline_score": null,
   "published": false,
   "description_file": "CHALLENGE.md",
@@ -21,7 +18,8 @@
     "invalid": 110,
     "upstream": 262,
     "local": 14,
-    "ordinary_ecdsa_differences": 14
+    "ordinary_ecdsa_differences": 14,
+    "scope": "external byte adapters and generated-witness diagnostics; not native-input classifications"
   },
   "reference_verifier": {
     "repository": "https://github.com/z-tech/longfellow-zk",
@@ -29,10 +27,22 @@
     "pull_request": "https://github.com/longfellow-zk/longfellow-zk/pull/215",
     "source": "vendor/longfellow/ECDSA/EcdsaCircuit.lean",
     "relation": "ValidEcdsaWitness",
-    "variant": "upstream circuit satisfiability with byte/signature envelope"
+    "variant": "native pointwise circuit relation"
   },
   "circuit_field": {
     "name": "P-256 base field",
     "modulus": "115792089210356248762697446949407573530086143415290314195533631308867097853951"
+  },
+  "native_interface": {
+    "statement_fields": [
+      "pkX",
+      "pkY",
+      "digest"
+    ],
+    "statement_field_elements": 3,
+    "source_witness_field_elements": 1034,
+    "relation": "pointwise in the supplied source witness",
+    "caller_assumptions": [],
+    "selector_encoding": "Lean 0..7; C++ centered 2*v-7"
   }
 }

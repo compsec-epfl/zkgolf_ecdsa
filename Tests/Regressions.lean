@@ -35,4 +35,9 @@ example (q : ProjectivePoint K) (x y : K) (hz : q.Z = 0) (hy : q.Y ≠ 0) :
   apply hy
   simpa [hz] using h.2
 
+-- Native target must check the supplied witness, not existentially replace it.
+example (pkX pkY digest : K) (w : EcdsaWitness K) (h : w.rx_inv = 0) :
+    ¬ Challenge.Specs.ECDSAP256.Spec pkX pkY digest w := by
+  simp [Challenge.Specs.ECDSAP256.Spec, ValidEcdsaWitness, h]
+
 end Tests.Regressions

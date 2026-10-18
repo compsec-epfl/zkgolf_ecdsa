@@ -3,6 +3,10 @@
   "lean4export_revision": "af5aa64bb914c3c2c781f378088dbd38acf4f804",
   "toolchain": "leanprover/lean4:v4.34.0",
   "scope": "local development shim; no sandbox, no full circuit proof",
+  "trusted_relation": "Challenge.Specs.ECDSAP256.Spec",
+  "trusted_wrapper_sha256": "0daea8792af63b36b4e9932e34ce8b95eca8516344fbfa8349268b9fe1695774",
+  "circuit_field": "P-256 base field",
+  "upstream_relation": "ValidEcdsaWitness",
   "cases": [
     {
       "case": "valid-relation",
@@ -26,8 +30,5 @@
     }
   ],
   "specification_commit": "4fe092be7e8e9634cd3b27daf55695a3a416043e",
-  "trusted_relation": "Challenge.Specs.ECDSAP256.Spec",
-  "upstream_relation": "ValidEcdsaWitness",
-  "circuit_field": "P-256 base field",
-  "trusted_wrapper_sha256": "19198c615aa60a657f11c9f3ce001f7324c69e8eea06d0c1795adad453457b69"
+  "native_interface": "pointwise in supplied statement and source-witness fields"
 }

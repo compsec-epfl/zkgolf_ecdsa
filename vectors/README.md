@@ -25,5 +25,13 @@ precomputation equality and the circuit loop. `check_cpp.py` runs the actual pin
 C++ evaluator for all cases that pass the explicit byte/canonical-scalar envelope.
 
 These are diagnostic checks on generated witnesses, not a proof deciding all
-possible witnesses. The authoritative relation existentially quantifies the
-upstream `ValidEcdsaWitness` and explicitly binds the supplied signature.
+possible witnesses. The authoritative relation directly checks the supplied upstream witness.
+
+## Native challenge boundary
+
+These serialized fixtures are external test adapters, not native challenge inputs.
+Their signatures generate specific source witnesses. A failing fixture means that
+adapter or generated witness fails; it does not mean no valid signature exists for
+the same key/digest. The native challenge accepts pkX, pkY, digest and a supplied
+source witness, and checks ValidEcdsaWitness pointwise. The old byte-envelope and
+existential-signature wrapper are no longer part of the trusted definition.

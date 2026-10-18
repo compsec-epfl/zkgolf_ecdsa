@@ -3,6 +3,10 @@ import Challenge.Specs.ECDSAP256
 namespace Tests.Oracle
 open Challenge.Specs.ECDSAP256
 
+-- Serialization adapter for external test vectors only.
+def fromBytes (bytes : ByteArray) : Nat :=
+  bytes.data.foldl (fun a b => 256 * a + b.toNat) 0
+
 /-- Test oracle for Longfellow's generated witness path. It uses the upstream
 addition, doubling, selector table and circuit loop, including affine-table
 exceptional cases. It is not an existential decision procedure or the trusted

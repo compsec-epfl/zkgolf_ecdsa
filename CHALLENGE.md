@@ -1,71 +1,80 @@
 # ECDSA P-256: Efficient Longfellow Circuit Verification
 
 Build the cheapest R1CS implementation of Longfellow’s ECDSA circuit relation.
-Match its accepted inputs and its rejections, including exceptional point-addition
-cases. The target is the pinned `ValidEcdsaWitness` relation, not the broader
-mathematical ECDSA specification.
+For every native input and supplied circuit witness, preserve the upstream
+accept/reject result, including exceptional point-addition cases.
 
-## Field and inputs
+## Native field and interface
 
-The circuit runs over the **P-256 base field**, just like Longfellow’s ECDSA circuit:
+The circuit runs over the **P-256 base field**, as Longfellow does:
 
 `p = 115792089210356248762697446949407573530086143415290314195533631308867097853951`.
 
-This is neither BN254 nor the P-256 scalar field. P-256 curve-coordinate arithmetic
-is native circuit-field arithmetic. Its subgroup order is
+The subgroup order is
 `n = 0xFFFFFFFF00000000FFFFFFFFFFFFFFFFBCE6FAADA7179E84F3B9CAC2FC632551`.
 
-The byte interface is retained. Each byte occupies one field element; the caller
-establishes only that these elements lie in `[0,256)`.
-
-| Input | Bytes | Encoding |
+| Native input | Field elements | Meaning |
 |---|---:|---|
-| publicKey | 64 | Affine x || y, unsigned big-endian; no SEC1 prefix |
-| digest | 32 | Supplied unsigned big-endian digest |
-| signature | 64 | P1363 r || s, unsigned big-endian |
+| pkX, pkY | 2 | Affine verification-key coordinates |
+| digest | 1 | Digest already mapped into the base field |
+| rx, ry, rxInv, sInv, pkInv | 5 | Signature-point coordinates and inverse witnesses |
+| pre | 8 | Affine precomputation table |
+| bi | 256 | Upstream Lean selector values, 0..7 when valid |
+| intX, intY, intZ | 3 × 255 | Projective intermediate-state witnesses |
 
-The wrapper checks lengths, canonical key coordinates (`x,y < p`), and canonical
-nonzero signature scalars (`r,s < n`). It requires the existence of a Longfellow
-witness satisfying `ValidEcdsaWitness` with those key coordinates and the digest
-cast into the base field. Its selector streams must encode the supplied `r` and
-`n − s`, binding the supplied signature to the circuit witness. The digest has the
-upstream field-input semantics, including reduction modulo `p` at that boundary.
+These are three statement fields and 1,034 source-witness fields. In a proof-system
+integration the source witness is private; being an `Input` in the Lean circuit
+API does not make it public. The signature is encoded in that witness, rather
+than supplied as a separate byte array.
 
-The relation retains Longfellow’s affine precomputation requirements, nonzero
-checks and all loop constraints. Contestants must not expand acceptance to
-ordinary-ECDSA inputs that this relation rejects, such as `PK = −G`.
+The acceptance relation is exactly:
 
-> Longfellow uses `r = R.x` directly and excludes exceptional affine-table additions.
+```lean
+ValidEcdsaWitness w { X := pkX, Y := pkY } digest n params
+```
 
-The authoritative definition is `Challenge.Specs.ECDSAP256.Spec`, wrapping
-`ValidEcdsaWitness` from `ECDSA/EcdsaCircuit.lean` at commit
+`params` fixes P-256 and 256 scalar bits. Fixed-size vectors in the interface map
+to the upstream witness lists. There are no caller assumptions: key validity,
+selector ranges, inverse checks, table equalities and loop constraints are all
+part of the relation. There is no extra byte parsing or signature binding envelope.
+
+Correctness is **pointwise in the supplied witness**. An optimized circuit may add
+internal wires, but must accept exactly the same native input/witness tuples.
+Merely proving that some signature exists for the key and digest is insufficient.
+
+The pinned source is `ECDSA/EcdsaCircuit.lean` at commit
 `4fe092be7e8e9634cd3b27daf55695a3a416043e`
-([PR #215](https://github.com/longfellow-zk/longfellow-zk/pull/215)). The exact pinned
-Lean relation prevails over this summary. `StandardEcdsaVerify` is not the challenge’s
-acceptance relation. The PR’s specification correction does not alter the C++ circuit.
+([PR #215](https://github.com/longfellow-zk/longfellow-zk/pull/215)). The authoritative
+wrapper is `Challenge.Specs.ECDSAP256.Spec`; the comparator checks its exact types.
+
+> Longfellow uses direct-x signature verification and excludes exceptional affine-table additions.
+
+The formal model uses selector values 0..7. The C++ implementation represents
+these as `2*v - 7` for its mux; this is a witness-encoding conversion, not a change
+to the target’s acceptance conditions. This challenge pins the Lean circuit model,
+not an independently certified production binary or C++ compiler.
 
 ## Scoring and proofs
 
-Score = witness allocations + R1CS constraint rows. The circuit has unit output.
-Cost slots in `Cost.lean` are replaced during checking; their zeros are placeholders.
+Score = additional witness allocations + R1CS constraint rows. The fixed 1,037
+input field elements are common to every submission and are not counted as
+additional allocations. Cost-slot zeros are placeholders, not a baseline score.
+The circuit has unit output.
 
 Submissions provide a Clean circuit and the seven template obligations:
 soundness, completeness, exact cost, R1CS structure, witness-generation IR,
 computable witnesses and lawful requirement channels. Completeness is relative
-to the circuit relation above, including its existing restrictions.
+to the pointwise circuit relation, not all ordinary-ECDSA signatures.
 
 Only standard Lean axioms are permitted. P-256 primality is proved by the imported
-Longfellow Pratt certificate. No extra field-primality axiom is needed. Template
-`sorry` placeholders and native-decide proof axioms are not accepted in submissions.
+Longfellow Pratt certificate. Template `sorry` placeholders and native-decide proof
+axioms are not accepted in submissions.
 
-## Credential composition
+## Scope
 
-The supplied digest isolates signature verification. The surrounding credential
-proof must bind it to the credential encoding and hash and establish issuer trust
-and disclosure predicates. The interface does not assign public/private visibility.
-Message hashing and credential parsing are outside the score.
+This challenge isolates one ECDSA circuit invocation. Credential hashing,
+mdoc/COSE parsing, device-key commitments, age predicates and the full credential
+proof are outside its scope. The native digest is already a field element; message
+hashing and byte-to-field conversion happen before this component.
 
-This is an optimization challenge for the pinned Longfellow circuit model with
-an explicit byte/signature binding envelope. It is not a claim about a particular
-deployed Google Wallet binary. No contestant R1CS baseline is supplied. ECDSA is
-not post-quantum.
+No contestant R1CS baseline is supplied. ECDSA is not post-quantum.

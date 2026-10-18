@@ -16,23 +16,9 @@ def params : CurveParameters K := {
   gy := 0x4FE342E2FE1A7F9B8EE7EB4A7C0F9E162BCE33576B315ECECBB6406837BF51F5
   kBits := 256 }
 
-/-- Unsigned big-endian integer. -/
-def fromBytes (bytes : ByteArray) : Nat :=
-  bytes.data.foldl (fun a b => 256 * a + b.toNat) 0
-
-/-- Byte envelope around Longfellow's circuit satisfiability relation.
-The signature is bound to the circuit's r and negative-s selector streams.
-The digest is a base-field input, exactly as in verify_signature3. -/
-def Spec (publicKey digest signature : ByteArray) : Prop :=
-  publicKey.size = 64 ∧ digest.size = 32 ∧ signature.size = 64 ∧
-  let x := fromBytes (publicKey.extract 0 32)
-  let y := fromBytes (publicKey.extract 32 64)
-  let r := fromBytes (signature.extract 0 32)
-  let s := fromBytes (signature.extract 32 64)
-  x < p ∧ y < p ∧ 0 < r ∧ r < n ∧ 0 < s ∧ s < n ∧
-  ∃ w : EcdsaWitness K,
-    ValidEcdsaWitness w ({ X := (x : K), Y := (y : K) } : AffinePoint K)
-      (fromBytes digest : K) n params ∧
-    natR (w.bi.map val3) = r ∧ natS (w.bi.map val3) = n - s
+/-- Pointwise Longfellow circuit relation over its native field inputs.
+No byte decoding, signature envelope, or existential weakening is added. -/
+def Spec (pkX pkY digest : K) (w : EcdsaWitness K) : Prop :=
+  ValidEcdsaWitness w ({ X := pkX, Y := pkY } : AffinePoint K) digest n params
 
 end Challenge.Specs.ECDSAP256
