@@ -1,0 +1,15 @@
+Command: lake build Baseline.Projected.Audit
+
+info: Baseline/Projected/Audit.lean:8:0: 'RepresentationBridge.P256.p256_boundLF_iff_representation_independent' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: Baseline/Projected/Audit.lean:9:0: 'Baseline.Projected.AffineBridge.affine_add_eq_longfellow' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Baseline/Projected/Audit.lean:10:0: 'Baseline.Projected.AffineBridge.affine_double_eq_longfellow' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Baseline/Projected/Audit.lean:11:0: 'Baseline.Projected.AffineBridge.elm_eq_longfellow' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Baseline/Projected/Audit.lean:12:0: 'Baseline.Projected.Algebra.elm_second_denominator_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Baseline/Projected/Audit.lean:13:0: 'Baseline.Projected.Algebra.double_denominator_ne' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Baseline/Projected/Audit.lean:14:0: 'Baseline.Projected.P256Algebra.discriminant_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: Baseline/Projected/Audit.lean:15:0: 'RepresentationBridge.OffsetExistence.exists_avoiding_injective_equations' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+Build completed successfully (8983 jobs).

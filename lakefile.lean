@@ -8,5 +8,12 @@ lean_lib Tests
 @[default_target] lean_exe vectors where
   root := `Tests.Main
 
+lean_lib Baseline
+lean_exe baseline where
+  root := `Baseline.Main
+
 lean_lib ECDSA where
   srcDir := "vendor/longfellow"
+
+lean_exe projected where
+  root := `Baseline.Projected.Main

@@ -1,0 +1,14 @@
+[package]
+name = "ecdsa-partner-audit"
+version = "0.1.0"
+edition = "2024"
+[[bin]]
+name = "audit"
+path = "main.rs"
+[dependencies]
+bellpepper-core = "=0.4.0"
+bellpepper = "=0.4.1"
+ff = { version = "=0.13.1", features = ["bits"] }
+halo2curves = "=0.10.0"
+num-bigint = "0.5"
+num-traits = "0.2.14"

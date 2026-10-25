@@ -1,0 +1,26 @@
+Command: lake exe projected
+
+Building offset circuit operations and fixed tables...
+Projected-signature offset experiment (5 fixed inputs)
+allocations=4631 rows=4636 score=9267 R1CS violations=0
+progress: 16 native cases, 0 disagreements
+progress: 32 native cases, 0 disagreements
+progress: 48 native cases, 0 disagreements
+progress: 64 native cases, 0 disagreements
+progress: 80 native cases, 0 disagreements
+progress: 96 native cases, 0 disagreements
+progress: 112 native cases, 0 disagreements
+progress: 128 native cases, 0 disagreements
+progress: 144 native cases, 0 disagreements
+progress: 160 native cases, 0 disagreements
+progress: 176 native cases, 0 disagreements
+progress: 192 native cases, 0 disagreements
+H search wycheproof-214: H=2G
+progress: 208 native cases, 0 disagreements
+progress: 224 native cases, 0 disagreements
+progress: 240 native cases, 0 disagreements
+H search local-generator: H=2G
+vectors: 252 agree, 0 disagree (166 source accepted, 24 byte-format cases skipped)
+offset search: max H=2, sum H=168; rejected cases tested only H=G
+digest p+1 lift: original=true offset H=(some 2) field digest=1
+Q=3G,R=2G,e=1 retry: original=true, H=G failure=(some 1540), first satisfying H=(some 2)

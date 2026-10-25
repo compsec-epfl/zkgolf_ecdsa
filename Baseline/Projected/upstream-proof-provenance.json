@@ -1,0 +1,68 @@
+{
+  "upstream_repository": "https://github.com/longfellow-zk/longfellow-zk",
+  "commit": "4fe092be7e8e9634cd3b27daf55695a3a416043e",
+  "lean_toolchain": "v4.34.0",
+  "modules": [
+    {
+      "file": "ECBridge.lean",
+      "upstream_path": "formal/circuits/ECDSA/ECBridge.lean",
+      "upstream_sha256": "9d1f8d2aab84c7a16177914288bd7203543d2c9f0d0566a54c2eee7a310da3c9",
+      "adapted_sha256": "2fbf31fc9e7d52c8180ea56090b960d9b360307e503ab46ad77b8f0ed532dd6b"
+    },
+    {
+      "file": "Ecdsa.lean",
+      "upstream_path": "formal/circuits/ECDSA/Ecdsa.lean",
+      "upstream_sha256": "916aad56d4c2bc709f4cc183058683673b7413e5d21f4346cdfb0c6257298214",
+      "adapted_sha256": "64c4c180e016c48dd81ca75406720a6d513a47a7c5f6ce1d3628769e94812d64"
+    },
+    {
+      "file": "NoRoot.lean",
+      "upstream_path": "formal/circuits/ECDSA/NoRoot.lean",
+      "upstream_sha256": "e4f0a57c8733aa8e1d21196453d15f7989ad521f18ccd1a8c35e539e1a8bccb8",
+      "adapted_sha256": "054f1960d77e91ee8f1a51a20991ca4b7fbe248e81dac1e539954df9272eb7ac"
+    },
+    {
+      "file": "P256NoRoot.lean",
+      "upstream_path": "formal/circuits/ECDSA/P256NoRoot.lean",
+      "upstream_sha256": "dc16bee35c2186ea305fc9ef65189979542a1f7c5730a4287de52f6fa7bb7a5c",
+      "adapted_sha256": "efc1bb78d0d28104c756d83910eeb42255c1e37dc722ce3629d634034e54d5f6"
+    }
+  ],
+  "compatibility_changes": {
+    "ECBridge.lean": [
+      "Remove module declaration",
+      "public import becomes import",
+      "Remove expose/public section marker (no matching anonymous end)"
+    ],
+    "Ecdsa.lean": [
+      "Remove unused import PkCircuit; no theorem references any declaration from it"
+    ],
+    "NoRoot.lean": [
+      "Remove module declaration",
+      "public import becomes import",
+      "expose/public section becomes ordinary section"
+    ],
+    "P256NoRoot.lean": [
+      "Remove module declaration",
+      "public import becomes import",
+      "expose/public section becomes ordinary section"
+    ]
+  },
+  "new_modules": [
+    "BoundLF.lean",
+    "NaturalBoundLF.lean",
+    "RepresentationIndependent.lean",
+    "P256Bridge.lean"
+  ],
+  "checked_theorem": "RepresentationBridge.P256.p256_boundLF_iff_representation_independent",
+  "axioms": [
+    "propext",
+    "Classical.choice",
+    "Quot.sound"
+  ],
+  "limitations": [
+    "This relates source-witness existential projection to a group-level relation, not the original pointwise challenge contract.",
+    "The optimized Clean circuit is not covered by this equivalence theorem.",
+    "The generic offset-existence lemma has not been instantiated with a certified P-256 candidate set."
+  ]
+}

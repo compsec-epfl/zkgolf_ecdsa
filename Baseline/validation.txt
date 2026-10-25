@@ -1,0 +1,14 @@
+Longfellow verify_signature3 as R1CS (literal lowering)
+  additional witness allocations: 11375
+  R1CS constraint rows:           12415
+  challenge score:                23790
+  assertions that are not one R1CS row: 0
+Optimized lowering of the same relation
+  additional witness allocations: 9296
+  R1CS constraint rows:           10334
+  challenge score:                19630
+  assertions that are not one R1CS row: 0
+range boundary/random tests: 2568/2568 agree
+differential test of the optimized circuit
+vectors: 252 agree, 0 disagree (166 accepted by spec, 24 byte-format cases without a native witness)
+mutations: 232 agree, 0 disagree (0 accepted by spec)

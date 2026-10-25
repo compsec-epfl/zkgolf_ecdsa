@@ -1,0 +1,11 @@
+{
+  "field_prime": "115792089210356248762697446949407573530086143415290314195533631308867097853951",
+  "additional_allocations": 4631,
+  "rows": 4636,
+  "score": 9267,
+  "matrix_sha256": "b3b50f54f145220d7727ba112f51cd19fca0999b71db54c167e2955c0678a68c",
+  "sample_satisfies": true,
+  "input_mutations_rejected": 5,
+  "auxiliary_mutations_rejected": 4631,
+  "sample_free_auxiliary_columns": []
+}

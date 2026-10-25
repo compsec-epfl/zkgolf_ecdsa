@@ -1,0 +1,10 @@
+{
+  "repository": "https://github.com/eid-privacy/spartan-backend",
+  "commit": "ffbbd372afd559d7e2c4a7f7ab26f4d87cee79cb",
+  "directory": "spartan-backend/src/noir/synthesis",
+  "sha256": {
+    "allocated_point.rs": "d11b4a69c6f5a0af63449ecaeb953d3ba5c9d8af3a4d2fa4e6cc80986c369918",
+    "constant_point.rs": "b85e8d161290a984a4882dfcc2c88bb091382434d71f1f06899a909d70b1232f",
+    "constraints_utils.rs": "762900aee498e44da43b56b142e0f14facf6161915911b0db777104b067e6ce0"
+  }
+}
